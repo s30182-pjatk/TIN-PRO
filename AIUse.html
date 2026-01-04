@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Usage Documentation – Blog Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        code, pre {
+            background: #f4f4f4;
+            padding: 10px;
+            display: block;
+            overflow-x: auto;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Use of Artificial Intelligence in Blog Application Development</h1>
+
+<div class="section">
+    <h2>1. Overview</h2>
+    <p>
+        This document describes how Artificial Intelligence (AI) tools were used during the development
+        of a blog application, with a particular focus on the <strong>admin functionality</strong>,
+        <strong>frontend rendering</strong>, and <strong>AJAX-based interactions</strong>.
+    </p>
+    <p>
+        AI assistance was used as a development support tool to accelerate implementation, improve
+        code quality, and validate architectural decisions. All final code was reviewed, adapted,
+        and integrated manually by the developer.
+    </p>
+</div>
+
+<div class="section">
+    <h2>2. Admin Functionality Development</h2>
+    <p>
+        AI was used to help design and implement the admin panel of the blog application.
+        The admin panel allows administrators to:
+    </p>
+    <ul>
+        <li>Create, edit, and delete blog posts</li>
+        <li>Manage users and roles</li>
+        <li>View and manage subscriptions</li>
+        <li>Access all admin features through protected routes</li>
+    </ul>
+    <p>
+        AI assistance helped generate:
+    </p>
+    <ul>
+        <li>Express.js admin routes</li>
+        <li>Middleware logic for admin authorization</li>
+        <li>EJS templates for admin pages</li>
+        <li>Clean separation between API endpoints and rendered pages</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>3. Frontend Development (EJS + HTML + CSS)</h2>
+    <p>
+        AI was also used during frontend development to:
+    </p>
+    <ul>
+        <li>Structure EJS templates for admin and blog pages</li>
+        <li>Create simple, readable HTML layouts</li>
+        <li>Design a minimal and consistent CSS style for the admin interface</li>
+    </ul>
+    <p>
+        The frontend remains server-rendered using EJS, while JavaScript is used only where dynamic
+        interaction is required (AJAX actions).
+    </p>
+</div>
+
+<div class="section">
+    <h2>4. Use of AI for AJAX Functionality</h2>
+    <p>
+        A major area where AI assistance was used is the implementation of AJAX-based functionality.
+        This allows the admin panel to perform actions without full page reloads.
+    </p>
+
+    <h3>4.1 AJAX Create / Edit / Delete for Posts</h3>
+    <p>
+        AI was used to help design JavaScript functions that:
+    </p>
+    <ul>
+        <li>Submit forms using <code>fetch()</code></li>
+        <li>Send JSON payloads to Express endpoints</li>
+        <li>Handle POST, PUT, and DELETE HTTP methods</li>
+        <li>Update the UI after successful operations</li>
+    </ul>
+
+    <h3>4.2 AJAX Pagination of Posts</h3>
+    <p>
+        AI assistance was also used to design AJAX-based pagination for blog posts. This allows users
+        to load additional posts dynamically without refreshing the page.
+    </p>
+    <p>
+        The AI helped with:
+    </p>
+    <ul>
+        <li>Pagination query parameters (page, limit)</li>
+        <li>Backend endpoint design for paginated results</li>
+        <li>Frontend JavaScript logic to fetch and append posts</li>
+        <li>Improving user experience through incremental loading</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>5. Example Prompts Used</h2>
+    <p>
+        Below are examples of prompts used to guide the AI during development. These prompts were
+        adapted and refined iteratively as the project evolved.
+    </p>
+
+    <h3>5.1 Admin CRUD Functionality</h3>
+    <pre>
+Create an Express.js admin router for a blog app with EJS views.
+I need AJAX-based create, edit, and delete for posts.
+Do not change my existing Mongoose models.
+    </pre>
+
+    <h3>5.2 AJAX Edit and Delete for Posts</h3>
+    <pre>
+Rewrite my admin post management to use proper HTML forms
+and fetch-based AJAX instead of browser prompts.
+Include edit and delete functionality.
+    </pre>
+
+    <h3>5.3 AJAX Pagination of Posts</h3>
+    <pre>
+Create an AJAX pagination system for blog posts.
+The backend uses Express and MongoDB.
+The frontend uses vanilla JavaScript and EJS.
+Posts should load dynamically without page refresh.
+    </pre>
+</div>
+
+<div class="section">
+    <h2>6. Role of AI in the Development Process</h2>
+    <p>
+        AI was used as a <strong>supporting development tool</strong>, not as a replacement for
+        developer decision-making. The AI helped:
+    </p>
+    <ul>
+        <li>Speed up boilerplate generation</li>
+        <li>Provide architectural suggestions</li>
+        <li>Debug authentication and middleware issues</li>
+        <li>Improve clarity and structure of code</li>
+    </ul>
+    <p>
+        All AI-generated content was reviewed, tested, and modified as needed to meet project
+        requirements and coding standards.
+    </p>
+</div>
+
+<div class="section">
+    <h2>7. Conclusion</h2>
+    <p>
+        The use of AI significantly improved development efficiency and helped implement robust
+        admin and frontend functionality for the blog application. By combining AI-generated
+        guidance with hands-on development and debugging, the project achieved a clean,
+        maintainable, and feature-complete result.
+    </p>
+</div>
+
+</body>
+</html>

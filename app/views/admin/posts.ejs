@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin – Posts</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<nav>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/posts">Posts</a>
+    <a href="/admin/roles">Roles</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/subscriptions">Subscriptions</a>
+</nav>
+
+<div class="container">
+    <h2>Posts</h2>
+
+    <h3>Create Post</h3>
+    <form onsubmit="event.preventDefault(); submitForm(this, 'POST', '/admin/posts')">
+        <input name="title" placeholder="Title" required>
+        <textarea name="content" placeholder="Content" required></textarea>
+        <input name="author" placeholder="Author ID" required>
+        <button type="submit">Create</button>
+    </form>
+
+    <ul>
+        <% posts.forEach(p => { %>
+            <li>
+                <span>
+                    <strong><%= p.title %></strong>
+                    by <%= p.author?.username || "Unknown" %>
+                </span>
+
+                <div class="actions">
+                    <button onclick="showEditPost('<%= p._id %>')">Edit</button>
+                    <button class="delete"
+                            onclick="deleteItem('/admin/posts/<%= p._id %>')">
+                        Delete
+                    </button>
+                </div>
+
+                <form
+                        id="edit-post-<%= p._id %>"
+                        style="display:none"
+                        onsubmit="event.preventDefault(); submitForm(this, 'PUT', '/admin/posts/<%= p._id %>')"
+                >
+                    <input name="title" value="<%= p.title %>" required>
+                    <textarea name="content"><%= p.content %></textarea>
+                    <button type="submit">Save</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

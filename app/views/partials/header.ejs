@@ -1,0 +1,20 @@
+<header class="blog-header">
+    <nav class="nav">
+        <h1 class="logo">
+            <a href="/api/">MyBlog</a>
+        </h1>
+
+        <ul class="nav-links">
+            <li><a href="/api/">Home</a></li>
+
+            <% if (user) { %>
+                <li><a href="/api/profile/">Profile</a></li>
+                <li><a href="/api/post/">New Post</a></li>
+                <li><a href="/api/logout">Logout</a></li>
+            <% } else { %>
+                <li><a href="/api/login">Login</a></li>
+                <li><a href="/api/signup">SignUp</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</header>

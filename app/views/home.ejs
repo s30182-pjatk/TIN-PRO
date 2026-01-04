@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<%- include("partials/header") %>
+
+<section class="feed-toggle">
+    <button class="feed-btn active" data-feed="all">All Posts</button>
+    <button class="feed-btn" data-feed="subscribed">Subscribed</button>
+</section>
+
+<section class="posts-container" id="postsContainer"></section>
+
+<section class="pagination">
+    <button class="page-btn" id="prevBtn">← Prev</button>
+    <span class="page-info" id="pageInfo"></span>
+    <button class="page-btn" id="nextBtn">Next →</button>
+</section>
+
+<script>
+    window.INITIAL_FEED = "<%= feed %>";
+    window.INITIAL_PAGE = <%= currentPage %>;
+</script>
+<script src="/javascripts/home.js"></script>
+
+</body>
+</html>

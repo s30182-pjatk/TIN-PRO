@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin – Users</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<nav>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/posts">Posts</a>
+    <a href="/admin/roles">Roles</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/subscriptions">Subscriptions</a>
+</nav>
+
+<div class="container">
+    <h2>Users</h2>
+
+    <form onsubmit="event.preventDefault(); submitForm(this, 'POST', '/admin/users')">
+        <input name="username" placeholder="Username" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="password" type="password" placeholder="Password" required>
+
+        <select name="role" required>
+            <% roles.forEach(r => { %>
+                <option value="<%= r._id %>"><%= r.name %></option>
+            <% }) %>
+        </select>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <ul>
+        <% users.forEach(u => { %>
+            <li>
+                <span><%= u.username %> (<%= u.role?.name %>)</span>
+                <button class="delete"
+                        onclick="deleteItem('/admin/users/<%= u._id %>')">
+                    Delete
+                </button>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

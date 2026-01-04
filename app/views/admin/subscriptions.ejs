@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin – Subscriptions</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<nav>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/posts">Posts</a>
+    <a href="/admin/roles">Roles</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/subscriptions">Subscriptions</a>
+</nav>
+
+<div class="container">
+    <h2>Subscriptions</h2>
+
+    <ul>
+        <% subs.forEach(s => { %>
+            <li>
+                <span>
+                    <%= s.subscriber.username %> → <%= s.publisher.username %>
+                </span>
+                <button class="delete"
+                        onclick="deleteItem('/admin/subscriptions/<%= s._id %>')">
+                    Delete
+                </button>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

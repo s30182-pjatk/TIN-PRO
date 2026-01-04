@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= user.username %> — Profile</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<%- include('partials/header') %>
+
+<section class="profile-container">
+    <div class="profile-header">
+        <h2><%= user.username %></h2>
+        <p class="profile-email"><%= user.email %></p>
+        <p class="profile-date">
+            Joined: <%= new Date(user.registrationDate).toLocaleDateString() %>
+        </p>
+    </div>
+
+    <hr>
+
+    <h3 class="profile-posts-title">Your Posts</h3>
+
+    <% if (posts.length === 0) { %>
+        <p class="no-posts" id="no-posts-msg">
+            You haven’t published any posts yet.
+        </p>
+    <% } else { %>
+        <p class="no-posts" id="no-posts-msg" style="display: none;">
+            You haven’t published any posts yet.
+        </p>
+    <% } %>
+
+    <section class="posts-container">
+        <% posts.forEach(post => { %>
+            <article class="post-card" id="post-<%= post._id %>">
+                <h3 class="post-title" data-id="<%= post._id %>">
+                    <%= post.title %>
+                </h3>
+
+                <p class="post-content" data-id="<%= post._id %>">
+                    <%= post.content %>
+                </p>
+
+                <!-- Hidden edit fields -->
+                <input
+                        class="edit-title"
+                        type="text"
+                        value="<%= post.title %>"
+                        style="display: none;"
+                />
+
+                <textarea
+                        class="edit-content"
+                        style="display: none;"
+                ><%= post.content %></textarea>
+
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <button class="edit-btn" onclick="enableEdit(this)">
+                            Edit
+                        </button>
+
+                        <button
+                                class="save-btn"
+                                style="display: none;"
+                                onclick="saveEdit('<%= post._id %>', this)">
+                            Save
+                        </button>
+
+                        <button
+                                class="delete-btn"
+                                onclick="deletePost(event, '<%= post._id %>')">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </article>
+        <% }) %>
+    </section>
+
+</section>
+<script src="/javascripts/deletePost.js"></script>
+<script src="/javascripts/editPost.js"></script>
+</body>
+</html>

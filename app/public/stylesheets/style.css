@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playwrite IT Moderna", cursive;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+
+.form-container {
+    width: 300px;
+    margin: auto auto;
+    padding: 20px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+.form-group label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input{
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    /* background: #E5DADD; */
+    background: #F6F8FB;
+
+}
+
+.submit-btn{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+.submit-btn:hover{
+    background-color: #066CDB;
+    transform: scale(1.01);
+}
+
+p{
+    margin-top: 15px;
+}
+
+.blog-header {
+    width: 100%;
+    padding: 15px 30px;
+    border-bottom: 2px solid #ccc;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* POSTS SECTION */
+.posts-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.post-card {
+    padding: 25px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background: #F6F8FB;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.post-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.post-meta {
+    font-size: 14px;
+    color: #555;
+    text-align: right;
+}
+
+.no-posts {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #F6F8FB;
+    resize: vertical;
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-email,
+.profile-date {
+    color: #555;
+    font-size: 14px;
+}
+
+.profile-posts-title {
+    margin: 30px 0 20px;
+    text-align: center;
+}
+
+.error {
+    color: #d9534f;
+    font-size: 13px;
+    margin-top: 5px;
+    display: block;
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+.post-page-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.post-full-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.post-full-meta {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.post-full-content {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.post-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+}
+
+.post-card {
+    cursor: pointer;
+}
+
+.post-card:hover {
+    background-color: #f8f8f8;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.post-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-link:hover .post-title {
+    text-decoration: underline;
+}
+
+.author-link {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.author-link:hover {
+    text-decoration: underline;
+}
+
+.subscribe-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid #0077cc;
+    background-color: transparent;
+    color: #0077cc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+.subscribe-btn:hover {
+    background-color: #0077cc;
+    color: #ffffff;
+}
+
+/* Active click */
+.subscribe-btn:active {
+    transform: scale(0.97);
+}
+
+/* Optional: subscribed state */
+.subscribe-btn.subscribed {
+    background-color: #0077cc;
+    color: white;
+    border-color: #0077cc;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    padding: 4px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.edit-btn:hover {
+    background-color: #43a047;
+}
+
+.save-btn {
+    padding: 4px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.save-btn:hover {
+    background-color: #43a047;
+}
+
+.delete-btn {
+    padding: 4px 10px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+.edit-content{
+    margin: 10px auto;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.page-btn {
+    padding: 8px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #111827;
+    font-weight: 500;
+}
+
+.page-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.page-info {
+    font-size: 0.95rem;
+    color: #6b7280;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 20px;
+}
+.page-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 110px;
+}
+
+/* Hover */
+.page-btn:hover:not(:disabled) {
+    background-color: #f5f5f5;
+    border-color: #bbb;
+}
+
+/* Active click */
+.page-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+/* Disabled state */
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-info {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+
+.feed-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 30px 0;
+}
+
+.feed-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #0077cc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0077cc;
+    transition: all 0.2s ease;
+}
+
+.feed-btn:hover {
+    background-color: #0077cc;
+    color: white;
+}
+
+.feed-btn.active {
+    background-color: #0077cc;
+    color: white;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<%- include('partials/header') %>
+
+<section class="post-page-container">
+
+    <article class="post-full">
+        <h1 class="post-full-title">
+            <%= post.title %>
+        </h1>
+
+        <div class="post-full-meta">
+            <span class="post-author">
+                By <strong><%= post.author.username %></strong>
+            </span>
+            <span class="post-date">
+                • <%= new Date(post.postDate).toLocaleDateString() %>
+            </span>
+        </div>
+
+        <hr>
+
+        <div class="post-full-content">
+            <p><%= post.content %></p>
+        </div>
+    </article>
+
+</section>
+
+</body>
+</html>

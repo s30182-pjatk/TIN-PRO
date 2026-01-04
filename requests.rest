@@ -1,0 +1,26 @@
+POST http://localhost:8000/api/signup
+Content-Type: application/json
+
+{
+  "name": "Gleb Denisov",
+  "username": "glebden",
+  "email": "gleb@gmail.com",
+  "password": "SecurePassword"
+}
+
+###
+
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "gleb@gmail.com",
+  "password": "SecurePassword"
+}
+
+###
+
+GET http://localhost:8000/api/logout
+
+###
+GET http://localhost:8000/api/user/6957ae478e3025eb0085807d?page=2

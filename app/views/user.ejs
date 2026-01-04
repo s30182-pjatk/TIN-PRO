@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= user.username %> — Profile</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<%- include('partials/header') %>
+
+<section class="profile-container">
+    <div class="profile-header">
+        <div class="profile-header-info">
+            <h2><%= user.username %></h2>
+            <p class="profile-email"><%= user.email %></p>
+            <p class="profile-date">
+                Joined: <%= new Date(user.registrationDate).toLocaleDateString() %>
+            </p>
+            <button
+                    class="subscribe-btn <%= isSubscribed ? 'subscribed' : '' %>"
+                    id="subscribeBtn"
+                    data-user-id="<%= user._id %>">
+                <%= isSubscribed ? "Unsubscribe" : "Subscribe" %>
+            </button>
+        </div>
+
+
+    </div>
+
+    <hr>
+
+    <h3 class="profile-posts-title"><%= user.username %>'s Posts</h3>
+
+    <% if (posts.length === 0) { %>
+        <p class="no-posts" id="no-posts-msg">
+            User haven’t published any posts yet.
+        </p>
+    <% } else { %>
+        <p class="no-posts" id="no-posts-msg" style="display: none;">
+            User haven’t published any posts yet.
+        </p>
+    <% } %>
+
+    <section class="posts-container" id="postsContainer">
+        <% posts.forEach(post => { %>
+            <article class="post-card" id="post-<%= post._id %>">
+                <a href="/api/post/<%= post._id%>" class="post-link">
+                    <h3 class="post-title"><%= post.title %></h3>
+
+                    <p class="post-content">
+                        <%= post.content %>
+                    </p>
+
+                    <div class="post-meta">
+                    <span>
+                        <%= new Date(post.postDate).toLocaleDateString() %>
+                    </span>
+
+                    </div>
+                </a>
+            </article>
+        <% }) %>
+    </section>
+
+
+    <section class="pagination" id="pagination">
+        <button
+                class="page-btn"
+                id="prevBtn"
+                <%= currentPage <= 1 ? "disabled" : "" %>>
+            ← Prev
+        </button>
+
+        <span class="page-info" id="pageInfo">
+        Page <%= currentPage %> of <%= totalPages %>
+    </span>
+
+        <button
+                class="page-btn"
+                id="nextBtn"
+                <%= currentPage >= totalPages ? "disabled" : "" %>>
+            Next →
+        </button>
+    </section>
+
+</section>
+<script>
+    window.INIT_PAGE = <%= currentPage %>;
+    window.TOTAL_PAGES = <%= totalPages %>;
+    window.USER_ID = "<%= user._id %>";
+</script>
+<script src="/javascripts/subscripiton-validation.js"></script>
+<script src="/javascripts/pagination-user.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin – Roles</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<nav>
+    <a href="/admin">Dashboard</a>
+    <a href="/admin/posts">Posts</a>
+    <a href="/admin/roles">Roles</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/subscriptions">Subscriptions</a>
+</nav>
+
+<div class="container">
+    <h2>Roles</h2>
+
+    <form onsubmit="event.preventDefault(); submitForm(this, 'POST', '/admin/roles')">
+        <input name="name" placeholder="Role name" required>
+        <input name="description" placeholder="Description">
+        <button type="submit">Create</button>
+    </form>
+
+    <ul>
+        <% roles.forEach(r => { %>
+            <li>
+                <span><%= r.name %></span>
+                <button class="delete"
+                        onclick="deleteItem('/admin/roles/<%= r._id %>')">
+                    Delete
+                </button>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>
