@@ -1,54 +1,75 @@
 const User = require('../database/models/User');
 const Role = require('../database/models/Role');
-
 const { createSecretToken } = require("../tokenGeneration/generateToken");
 const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => {
-    try{
-        if (
-            !(
-                req.body.email &&
-                req.body.password &&
-                req.body.username
-            )
-        ){
-            res.status(400).send("All input is required");
+    try {
+        let { username, email, password } = req.body;
+
+        // 1️⃣ Presence validation
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                field: "form",
+                message: "All fields are required"
+            });
         }
 
-        const oldUser = await User.findOne({email: req.body.email});
+        // 2️⃣ Normalize
+        username = username.trim();
+        email = email.trim().toLowerCase();
+        password = password.trim();
 
+
+        // 4️⃣ Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                field: "email",
+                message: "Invalid email format"
+            });
+        }
+
+
+        // 6️⃣ Duplicate user check
+        const oldUser = await User.findOne({ email });
         if (oldUser) {
-            return res.status(409).send("User Already Exist. Please Login");
+            return res.status(409).json({
+                field: "email",
+                message: "User already exists"
+            });
         }
 
-        const salt = 10;
-        const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        const role = await Role.findOne({name: "user"});
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
+        // 7️⃣ Create user
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const role = await Role.findOne({ name: "user" });
+
+        const user = await User.create({
+            username,
+            email,
             password: hashedPassword,
-            role: role
+            role: role._id
         });
 
-        const user = await newUser.save();
         const token = createSecretToken(user._id);
-
         res.cookie("token", token, {
             path: "/",
             expires: new Date(Date.now() + 86400000),
-            secure: false,
             httpOnly: true,
-            sameSite: "Lax",
-        })
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Lax"
+        });
 
-        console.log("cookie set successfully");
+        return res.status(201).json({
+            success: true,
+            redirectTo: "/api/login"
+        });
 
-        // res.json(user);
-        res.render("login")
-    }catch (error){
-        console.log("Got an error", error);
+    } catch (error) {
+        console.error("Create user error:", error);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
     }
 };
 
