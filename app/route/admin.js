@@ -15,7 +15,8 @@ router.get("/", (req, res) => {
 
 router.get("/posts", async (req, res) => {
     const posts = await Post.find().populate("author");
-    res.render("admin/posts", { posts });
+    const users = await User.find();
+    res.render("admin/posts", { posts, users });
 });
 
 router.get("/roles", async (req, res) => {
