@@ -1,13 +1,17 @@
+
 const form = document.getElementById("createPostForm");
 const title = document.getElementById("title");
 const content = document.getElementById("content");
 
-form.addEventListener("submit", (e) => {
-    let isValid = true;
+form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // ⛔ stop normal submit
 
+    let isValid = true;
     clearErrors();
 
-    // Title validation
+    // ---------- FRONTEND VALIDATION ----------
+
+    // Title
     if (!title.value.trim()) {
         setError(title, "Post title is required");
         isValid = false;
@@ -16,7 +20,7 @@ form.addEventListener("submit", (e) => {
         isValid = false;
     }
 
-    // Content validation
+    // Content
     if (!content.value.trim()) {
         setError(content, "Post content is required");
         isValid = false;
@@ -25,16 +29,47 @@ form.addEventListener("submit", (e) => {
         isValid = false;
     }
 
-    if (!isValid) {
-        e.preventDefault();
+    if (!isValid) return;
+
+    // ---------- SEND TO SERVER ----------
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept": "application/json"
+            },
+            body: new URLSearchParams({
+                title: title.value.trim(),
+                content: content.value.trim()
+            })
+        });
+
+        const data = await response.json();
+
+        // ❌ Server-side validation error
+        if (!response.ok) {
+            showServerError(data);
+            return;
+        }
+
+        // ✅ Success → redirect
+        if (data.redirectTo) {
+            window.location.href = data.redirectTo;
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Server error. Please try again later.");
     }
 });
 
-// Clear errors while typing
+// ---------- LIVE ERROR CLEAR ----------
 [title, content].forEach(field => {
     field.addEventListener("input", () => clearError(field));
 });
 
+// ---------- HELPERS ----------
 function setError(field, message) {
     const error = field.parentElement.querySelector(".error");
     error.textContent = message;
@@ -47,4 +82,18 @@ function clearError(field) {
 
 function clearErrors() {
     document.querySelectorAll(".error").forEach(err => err.textContent = "");
+}
+
+function showServerError(data) {
+    // If server specifies a field, show inline error
+    if (data.field) {
+        const input = document.getElementById(data.field);
+        if (input) {
+            setError(input, data.message);
+            return;
+        }
+    }
+
+    // Fallback (non-field error)
+    alert(data.message || "Failed to create post");
 }
