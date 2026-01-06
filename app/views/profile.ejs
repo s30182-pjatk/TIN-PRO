@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title><%= user.username %> — Profile</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
 <body>
 
@@ -11,78 +12,131 @@
 <%- include('partials/header') %>
 
 <section class="profile-container">
+
+    <!-- Profile Header -->
     <div class="profile-header">
         <h2><%= user.username %></h2>
         <p class="profile-email"><%= user.email %></p>
         <p class="profile-date">
             Joined: <%= new Date(user.registrationDate).toLocaleDateString() %>
         </p>
+
     </div>
 
-    <hr>
+    <!-- Tabs -->
+    <div class="profile-tabs-wrapper">
+        <nav class="profile-tabs">
+            <button onclick="showSection('posts')">Posts</button>
+            <button onclick="showSection('subscribers')">Subscribers</button>
+            <button onclick="showSection('subscriptions')">Subscriptions</button>
+        </nav>
+    </div>
 
-    <h3 class="profile-posts-title">Your Posts</h3>
+    <!-- POSTS -->
+    <section id="posts" class="profile-section active">
+        <h3>Your Posts</h3>
 
-    <% if (posts.length === 0) { %>
-        <p class="no-posts" id="no-posts-msg">
-            You haven’t published any posts yet.
-        </p>
-    <% } else { %>
-        <p class="no-posts" id="no-posts-msg" style="display: none;">
-            You haven’t published any posts yet.
-        </p>
-    <% } %>
+        <% if (posts.length === 0) { %>
+            <p>You haven’t published any posts yet.</p>
+        <% } else { %>
+            <section class="posts-container">
+                <% posts.forEach(post => { %>
+                    <article class="post-card" id="post-<%= post._id %>">
 
-    <section class="posts-container">
-        <% posts.forEach(post => { %>
-            <article class="post-card" id="post-<%= post._id %>">
-                <h3 class="post-title" data-id="<%= post._id %>">
-                    <%= post.title %>
-                </h3>
+                        <h3 class="post-title"><%= post.title %></h3>
 
-                <p class="post-content" data-id="<%= post._id %>">
-                    <%= post.content %>
-                </p>
+                        <p class="post-content"><%= post.content %></p>
 
-                <!-- Hidden edit fields -->
-                <input
-                        class="edit-title"
-                        type="text"
-                        value="<%= post.title %>"
-                        style="display: none;"
-                />
+                        <!-- Hidden edit fields -->
+                        <input
+                                class="edit-title"
+                                type="text"
+                                value="<%= post.title %>"
+                                style="display:none"
+                        />
 
-                <textarea
-                        class="edit-content"
-                        style="display: none;"
-                ><%= post.content %></textarea>
+                        <textarea
+                                class="edit-content"
+                                style="display:none"
+                        ><%= post.content %></textarea>
 
-                <div class="post-footer">
-                    <div class="post-actions">
-                        <button class="edit-btn" onclick="enableEdit(this)">
-                            Edit
-                        </button>
+                        <div class="post-footer">
+                            <div class="post-actions">
+                                <button class="edit-btn" onclick="enableEdit(this)">
+                                    Edit
+                                </button>
 
-                        <button
-                                class="save-btn"
-                                style="display: none;"
-                                onclick="saveEdit('<%= post._id %>', this)">
-                            Save
-                        </button>
+                                <button
+                                        class="save-btn"
+                                        style="display:none"
+                                        onclick="saveEdit('<%= post._id %>', this)">
+                                    Save
+                                </button>
 
-                        <button
-                                class="delete-btn"
-                                onclick="deletePost(event, '<%= post._id %>')">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </article>
-        <% }) %>
+                                <button
+                                        class="delete-btn"
+                                        onclick="deletePost(event, '<%= post._id %>')">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+
+                    </article>
+                <% }) %>
+            </section>
+        <% } %>
+    </section>
+
+    <!-- SUBSCRIBERS -->
+    <section id="subscribers" class="profile-section">
+        <h3>Your Subscribers</h3>
+
+        <% if (subscribers.length === 0) { %>
+            <p>No one has subscribed to you yet.</p>
+        <% } else { %>
+            <ul class="user-list">
+                <% subscribers.forEach(s => { %>
+                    <li>
+                        <strong><%= s.subscriber.username %></strong><br>
+                        <small><%= s.subscriber.email %></small>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </section>
+
+    <!-- SUBSCRIPTIONS -->
+    <section id="subscriptions" class="profile-section">
+        <h3>You Are Subscribed To</h3>
+
+        <% if (subscriptions.length === 0) { %>
+            <p>You are not subscribed to anyone.</p>
+        <% } else { %>
+            <ul class="user-list">
+                <% subscriptions.forEach(s => { %>
+                    <li>
+                        <strong><%= s.publisher.username %></strong><br>
+                        <small><%= s.publisher.email %></small>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
     </section>
 
 </section>
+
+<script>
+    function showSection(id) {
+        document
+            .querySelectorAll('.profile-section')
+            .forEach(sec => sec.classList.remove('active'));
+
+        document.getElementById(id).classList.add('active');
+    }
+</script>
+
 <script src="/javascripts/deletePost.js"></script>
 <script src="/javascripts/editPost.js"></script>
+
 </body>
 </html>
