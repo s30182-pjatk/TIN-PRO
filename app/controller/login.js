@@ -25,10 +25,6 @@ const login = async (req, res) => {
         sameSite: "Lax",
     });
 
-    // res.json({ token });
-    // res.render("loginsuccess")
-    // res.redirect("/api/")
-
     res.status(200).json({
         success: true,
         redirectTo: "/api/"

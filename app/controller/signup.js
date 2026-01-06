@@ -1,4 +1,5 @@
 const User = require('../database/models/User');
+const Role = require('../database/models/Role');
 
 const { createSecretToken } = require("../tokenGeneration/generateToken");
 const bcrypt = require('bcrypt');
@@ -23,10 +24,12 @@ const createUser = async (req, res) => {
 
         const salt = 10;
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const role = await Role.findOne({name: "user"});
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
-            password: hashedPassword
+            password: hashedPassword,
+            role: role
         });
 
         const user = await newUser.save();
