@@ -4,7 +4,6 @@ async function saveEdit(postId, button) {
     const titleInput = postCard.querySelector(".edit-title");
     const contentInput = postCard.querySelector(".edit-content");
 
-    // 🔒 VALIDATION (same as create)
     let isValid = true;
 
     const title = titleInput.value.trim();
@@ -28,7 +27,7 @@ async function saveEdit(postId, button) {
         isValid = false;
     }
 
-    if (!isValid) return; // ❌ STOP SAVE
+    if (!isValid) return;
 
     // ✅ Continue save if valid
     const response = await fetch(`/api/post/${postId}`, {

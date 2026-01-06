@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
     try {
         let { username, email, password } = req.body;
 
-        // 1️⃣ Presence validation
+        
         if (!username || !email || !password) {
             return res.status(400).json({
                 field: "form",
@@ -15,13 +15,13 @@ const createUser = async (req, res) => {
             });
         }
 
-        // 2️⃣ Normalize
+        
         username = username.trim();
         email = email.trim().toLowerCase();
         password = password.trim();
 
 
-        // 4️⃣ Email validation
+        
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return res.status(400).json({
@@ -31,7 +31,7 @@ const createUser = async (req, res) => {
         }
 
 
-        // 6️⃣ Duplicate user check
+        
         const oldUser = await User.findOne({ email });
         if (oldUser) {
             return res.status(409).json({
@@ -40,7 +40,7 @@ const createUser = async (req, res) => {
             });
         }
 
-        // 7️⃣ Create user
+        
         const hashedPassword = await bcrypt.hash(password, 10);
         const role = await Role.findOne({ name: "user" });
 

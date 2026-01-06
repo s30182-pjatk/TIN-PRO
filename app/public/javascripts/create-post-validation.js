@@ -4,12 +4,11 @@ const title = document.getElementById("title");
 const content = document.getElementById("content");
 
 form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // ⛔ stop normal submit
+    e.preventDefault();
 
     let isValid = true;
     clearErrors();
 
-    // ---------- FRONTEND VALIDATION ----------
 
     // Title
     if (!title.value.trim()) {
@@ -20,7 +19,6 @@ form.addEventListener("submit", async (e) => {
         isValid = false;
     }
 
-    // Content
     if (!content.value.trim()) {
         setError(content, "Post content is required");
         isValid = false;
@@ -31,7 +29,6 @@ form.addEventListener("submit", async (e) => {
 
     if (!isValid) return;
 
-    // ---------- SEND TO SERVER ----------
     try {
         const response = await fetch(form.action, {
             method: "POST",
@@ -64,12 +61,10 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-// ---------- LIVE ERROR CLEAR ----------
 [title, content].forEach(field => {
     field.addEventListener("input", () => clearError(field));
 });
 
-// ---------- HELPERS ----------
 function setError(field, message) {
     const error = field.parentElement.querySelector(".error");
     error.textContent = message;
@@ -85,7 +80,6 @@ function clearErrors() {
 }
 
 function showServerError(data) {
-    // If server specifies a field, show inline error
     if (data.field) {
         const input = document.getElementById(data.field);
         if (input) {
@@ -94,6 +88,5 @@ function showServerError(data) {
         }
     }
 
-    // Fallback (non-field error)
     alert(data.message || "Failed to create post");
 }
